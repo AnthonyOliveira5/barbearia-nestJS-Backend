@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, Timestamp } from "typeorm";
+import { SolicitarServico } from "src/solicitar-servico/entities/solicitar-servico.entity";
+import { Entity, Column, PrimaryGeneratedColumn, Timestamp, OneToMany } from "typeorm";
 
 export class Servico {
     @PrimaryGeneratedColumn()
@@ -18,5 +19,8 @@ export class Servico {
     
     @Column()
     statusServico: boolean;
+
+    @OneToMany(() => SolicitarServico, (servico) => servico.tipoServico)
+    servicos: SolicitarServico[];
 
 }
