@@ -20,7 +20,7 @@ export class Servico {
     @Column()
     statusServico: boolean;
 
-    @OneToMany(() => SolicitarServico, (servico) => servico.tipoServico)
+    @OneToMany(() => SolicitarServico, (servico) => servico.servico)
     servicos: SolicitarServico[];
 
 }
