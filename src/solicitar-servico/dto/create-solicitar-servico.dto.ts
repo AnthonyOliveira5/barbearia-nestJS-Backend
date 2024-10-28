@@ -1,1 +1,3 @@
-export class CreateSolicitarServicoDto {}
+export class CreateSolicitarServicoDto {
+  servicoId: number;
+}

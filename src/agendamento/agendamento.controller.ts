@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { AgendamentoService } from './agendamento.service';
 import { CreateAgendamentoDto } from './dto/create-agendamento.dto';
 import { UpdateAgendamentoDto } from './dto/update-agendamento.dto';
+import { AgendamentoService } from './agendamento.service';
 
 @Controller('agendamento')
 export class AgendamentoController {
@@ -22,7 +22,7 @@ export class AgendamentoController {
     return this.agendamentoService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Update(':id')
   update(@Param('id') id: string, @Body() updateAgendamentoDto: UpdateAgendamentoDto) {
     return this.agendamentoService.update(+id, updateAgendamentoDto);
   }
