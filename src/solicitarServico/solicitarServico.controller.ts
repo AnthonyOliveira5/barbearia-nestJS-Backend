@@ -1,9 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { SolicitarServicoService } from './solicitar-servico.service';
-import { CreateSolicitarServicoDto } from './dto/create-solicitar-servico.dto';
-import { UpdateSolicitarServicoDto } from './dto/update-solicitar-servico.dto';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
+import { SolicitarServicoService } from './solicitarServico.service';
+import { CreateSolicitarServicoDto } from './dto/create-solicitarServico.dto';
+import { UpdateSolicitarServicoDto } from './dto/update-solicitarServico.dto';
 
-@Controller('solicitar-servico')
+@Controller('SolicitarServico')
 export class SolicitarServicoController {
   constructor(private readonly solicitarServicoService: SolicitarServicoService) {}
 
@@ -22,7 +22,7 @@ export class SolicitarServicoController {
     return this.solicitarServicoService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(@Param('id') id: string, @Body() updateSolicitarServicoDto: UpdateSolicitarServicoDto) {
     return this.solicitarServicoService.update(+id, updateSolicitarServicoDto);
   }

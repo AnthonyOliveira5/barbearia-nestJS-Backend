@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn} from "typeorm";
-import { SolicitarServico } from "src/solicitar-servico/entities/solicitar-servico.entity"; 
+import { SolicitarServico } from "src/solicitarServico/entities/SolicitarServico.entity"; 
 import { Usuario } from "src/usuarios/entities/usuario.entity";
 
 @Entity()
