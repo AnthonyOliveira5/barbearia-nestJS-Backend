@@ -2,7 +2,6 @@ import { Agendamento } from "src/agendamento/entities/agendamento.entity";
 import { Servico } from "src/servicos/entities/servico.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-
 @Entity()
 export class SolicitarServico {
 

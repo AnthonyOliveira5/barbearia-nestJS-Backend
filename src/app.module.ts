@@ -7,7 +7,7 @@ import { AgendamentoModule } from './agendamento/agendamento.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'ormconfig';
 import { ServicosModule } from './servicos/servicos.module';
-import { SolicitarServicoModule } from './solicitar-servico/solicitar-servico.module';
+import { SolicitarServicoModule } from './solicitarServico/solicitarServico.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(config), UsuariosModule, ClienteModule, AgendamentoModule, ServicosModule, SolicitarServicoModule],

@@ -2,8 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { In, Repository } from 'typeorm';
 import { Servico } from 'src/servicos/entities/servico.entity';
-import { SolicitarServico } from 'src/solicitar-servico/entities/solicitar-servico.entity';
+import { SolicitarServico } from 'src/solicitarServico/entities/SolicitarServico.entity';
 import { CreateAgendamentoDto } from './dto/create-agendamento.dto';
+import { UpdateAgendamentoDto } from './dto/update-agendamento.dto';
 
 @Injectable()
 export class AgendamentoService {
@@ -43,5 +44,17 @@ export class AgendamentoService {
     return this.agendamentosRepository.find({
       relations: ['items', 'items.servico', 'usuario'],
     });
+  }
+
+  findOne(id: number) {
+    return this.agendamentosRepository.findOneBy({id: id});
+  }
+
+  update(id: number, updateAgendamentoDto: UpdateAgendamentoDto) {
+    return this.agendamentosRepository.update(id, updateAgendamentoDto);
+  }
+
+  remove(id: number){
+    return this.agendamentosRepository.delete(id);
   }
 }

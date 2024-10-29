@@ -20,6 +20,9 @@ export class UsuariosService {
   findAll() {
     return this.usuariosRepository.find();
   }
+  findOne(id: number) {
+    return this.usuariosRepository.findOneBy({id: id});
+  }
 
   async update(id: number, updateusuarioDto: UpdateUsuarioDto) {
     const usuario = await this.usuariosRepository.findOneBy({ id });
