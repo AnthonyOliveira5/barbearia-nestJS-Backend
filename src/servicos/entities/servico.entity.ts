@@ -1,6 +1,7 @@
 import { SolicitarServico } from "src/solicitarServico/entities/SolicitarServico.entity";
-import { Entity, Column, PrimaryGeneratedColumn, Timestamp, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
+@Entity()
 export class Servico {
     @PrimaryGeneratedColumn()
     id: number;
