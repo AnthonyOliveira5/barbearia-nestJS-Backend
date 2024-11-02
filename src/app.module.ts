@@ -8,9 +8,20 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'ormconfig';
 import { ServicosModule } from './servicos/servicos.module';
 import { SolicitarServicoModule } from './solicitarServico/solicitarServico.module';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(config), UsuariosModule, ClienteModule, AgendamentoModule, ServicosModule, SolicitarServicoModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    TypeOrmModule.forRoot(config),
+    UsuariosModule,
+    ClienteModule,
+    AgendamentoModule,
+    ServicosModule,
+    SolicitarServicoModule,
+    AuthModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

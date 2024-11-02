@@ -4,6 +4,7 @@ import { Usuario } from './entities/usuario.entity';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsuariosService {
@@ -12,8 +13,9 @@ export class UsuariosService {
     private usuariosRepository: Repository<Usuario>,
   ) {}
 
-  create(createusuarioDto: CreateUsuarioDto) {
-    const usuario = this.usuariosRepository.create(createusuarioDto);
+  async create(createusuarioDto: CreateUsuarioDto) {
+    const senha = await bcrypt.hash(createusuarioDto.senha, 10);
+    const usuario = this.usuariosRepository.create({ ...createusuarioDto, senha });
     return this.usuariosRepository.save(usuario);
   }
 
@@ -24,6 +26,10 @@ export class UsuariosService {
     return this.usuariosRepository.findOneBy({id: id});
   }
 
+  findOneByEmail(email: string) {
+    return this.usuariosRepository.findOneBy({ email });
+  }
+  
   async update(id: number, updateusuarioDto: UpdateUsuarioDto) {
     const usuario = await this.usuariosRepository.findOneBy({ id });
     if (!usuario) {
