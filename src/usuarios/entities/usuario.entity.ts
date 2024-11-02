@@ -8,10 +8,13 @@ export class Usuario {
     id: number;
 
     @Column()
-    name: string;
+    nome: string;
 
     @Column()
     email:string;
+
+    @Column()
+    senha: string;
 
     @OneToMany(() => Agendamento, (agendamento) => agendamento.usuario)
     agendamentos: Agendamento[];
