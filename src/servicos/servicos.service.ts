@@ -17,7 +17,7 @@ export class ServicosService {
 
   findAll() {
     return this.servicosRepository.find({
-      relations: ['items', 'items.servico', 'usuario'],
+      relations: ['tipoServico', 'descricaoServico', 'duracaoServico'],
     });
   }
 
