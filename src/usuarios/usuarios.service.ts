@@ -20,7 +20,10 @@ export class UsuariosService {
   }
 
   findAll() {
-    return this.usuariosRepository.find();
+    return this.usuariosRepository.find({
+      select: ['id', 'nome', 'email'],
+      relations: ['usuario'],
+    });
   }
   findOne(id: number) {
     return this.usuariosRepository.findOneBy({id: id});

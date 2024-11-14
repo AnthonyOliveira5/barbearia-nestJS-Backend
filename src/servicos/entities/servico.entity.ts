@@ -7,7 +7,7 @@ export class Servico {
     id: number;
 
     @Column()
-    tipoServico: string;
+    nomeServico: string;
 
     @Column()
     descricaoServico: string;
