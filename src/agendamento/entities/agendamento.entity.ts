@@ -9,15 +9,17 @@ export class Agendamento {
     id: number;
 
     @Column()
+    usuarioId: number;
+    
+    @Column()
     total: number;
 
     @Column()
-    usuarioId: number;
+    dataAgendamento: Date;
 
-    @OneToMany(() => SolicitarServico, (servico) => servico.agendamento)
-    agendamentos: SolicitarServico[];
+    @OneToMany(() => SolicitarServico, (solicitacao) => solicitacao.agendamento)
+    solicitacoes: SolicitarServico[];
 
     @ManyToOne(() => Usuario, (usuario) => usuario.agendamentos)
     usuario: Usuario;
 }
-

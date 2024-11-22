@@ -5,10 +5,10 @@ import { AgendamentoService } from './agendamento.service';
 
 @Controller('agendamento')
 export class AgendamentoController {
-  constructor(private readonly agendamentoService: AgendamentoService) {}
+  constructor(private readonly agendamentoService: AgendamentoService) { }
 
   @Post()
-  create(@Body() createAgendamentoDto: CreateAgendamentoDto) {
+  async create(@Body() createAgendamentoDto: CreateAgendamentoDto) {
     return this.agendamentoService.create(createAgendamentoDto);
   }
 
