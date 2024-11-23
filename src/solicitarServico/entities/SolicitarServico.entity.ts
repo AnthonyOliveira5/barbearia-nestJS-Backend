@@ -7,6 +7,9 @@ export class SolicitarServico {
 
     @PrimaryGeneratedColumn()
     id: number;
+    
+    @Column()
+    servicoId: number;
 
     @Column()
     quantidade: number;
@@ -20,14 +23,11 @@ export class SolicitarServico {
     @Column()
     agendamentoId: number;
 
-    @Column()
-    servicoId: number;
-
-    @ManyToOne(() => Agendamento, (agendamento) => agendamento.agendamentos)
+    @ManyToOne(() => Agendamento, (agendamento) => agendamento.solicitacoes)
     @JoinColumn({name: 'agendamentoId'})
     agendamento: Agendamento;
 
-    @ManyToOne(() => Servico, (servico) => servico.servicos)
+    @ManyToOne(() => Servico, (solicitacao) => solicitacao.solicitacoes)
     @JoinColumn({name: 'servicoId'})
     servico: Servico;    
 

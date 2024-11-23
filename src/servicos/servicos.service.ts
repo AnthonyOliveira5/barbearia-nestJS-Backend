@@ -18,7 +18,6 @@ export class ServicosService {
   findAll() {
     return this.servicosRepository.find({
       select: ['id', 'nomeServico', 'descricaoServico', 'precoServico', 'duracaoServico', 'statusServico'],
-      relations: ['servicos'],
     });
   }
 
