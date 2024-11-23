@@ -17,11 +17,11 @@ export class Servico {
 
     @Column()
     duracaoServico: number;
-    
+
     @Column()
     statusServico: boolean;
 
-    @OneToMany(() => SolicitarServico, (servico) => servico.servico)
-    servicos: SolicitarServico[];
+    @OneToMany(() => SolicitarServico, (solicitacao) => solicitacao.servico)
+    solicitacoes: SolicitarServico[];
 
 }
