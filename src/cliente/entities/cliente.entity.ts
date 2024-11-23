@@ -1,18 +1,17 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class Cliente {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  nomeCliente: string;
 
   @Column()
-  emailUsuario: string;
+  emailCliente: string;
 
-  @Column()
-  dataNascimentoUsuario: Date;
+  @Column({ type: 'date' })
+  dataNascimentoCliente: Date;
 
-  @Column()
-  salarioUsuario: number;
 }
