@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
-import { IsBoolean, IsDate, IsNotEmpty, IsNumber, Matches } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumber, Matches } from 'class-validator';
+import { IsCPF } from 'class-validator-cpf';
 
 export class CreateClienteDto {
   @IsNotEmpty({ message: 'Nome é obrigatório' })
@@ -13,4 +14,9 @@ export class CreateClienteDto {
   @IsDate({ message: 'Data de nascimento deve ser uma data válida' })
   dataNascimentoCliente: Date;
 
+  @IsCPF({message: 'precisa ser um CPF válido'})
+  CPFcliente: string;
+
+  @IsNotEmpty({message: 'Endereço é obrigatório'})
+  enderecoCliente: string;
 }

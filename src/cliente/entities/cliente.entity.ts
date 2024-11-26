@@ -9,9 +9,15 @@ export class Cliente {
   nomeCliente: string;
 
   @Column()
+  CPFCliente: string;
+
+  @Column()
   emailCliente: string;
 
   @Column({ type: 'date' })
   dataNascimentoCliente: Date;
+
+  @Column()
+  enderecoCliente: string;
 
 }
