@@ -32,6 +32,7 @@ export class AgendamentoService {
   
     const agendamento = this.agendamentosRepository.create({
       usuarioId: createAgendamentoDto.usuarioId,
+      clienteId: createAgendamentoDto.clienteId,
       dataAgendamento: createAgendamentoDto.dataAgendamento,
       total,
     });
@@ -57,7 +58,7 @@ export class AgendamentoService {
   }
   findAll() {
     return this.agendamentosRepository.find({
-      relations: ['solicitacoes', 'solicitacoes.servico'],
+      relations: ['solicitacoes', 'solicitacoes.servico', 'cliente'],
     });
   }
 

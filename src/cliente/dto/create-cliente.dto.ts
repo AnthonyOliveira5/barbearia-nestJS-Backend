@@ -24,6 +24,9 @@ export class CreateClienteDto {
   )
   senhaCliente: string;
 
+  @IsNotEmpty({ message: 'chave segura é obrigatória' })
+  chaveSeguraCliente: string;
+
   @IsNotEmpty({message: 'Endereço é obrigatório'})
   enderecoCliente: string;
 }

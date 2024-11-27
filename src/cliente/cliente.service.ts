@@ -14,13 +14,14 @@ export class ClienteService {
 
   async create(createClienteDto: CreateClienteDto) {
     const senhaCliente = await bcrypt.hash(createClienteDto.senhaCliente, 10);
-    const cliente = this.clienteRepository.create({ ...createClienteDto, senhaCliente });
+    const chaveSeguraCliente = await bcrypt.hash(createClienteDto.chaveSeguraCliente, 10);
+    const cliente = this.clienteRepository.create({ ...createClienteDto, senhaCliente, chaveSeguraCliente });
     return this.clienteRepository.save(cliente);
   }
 
   findAll() {
     return this.clienteRepository.find({
-      select: ['id', 'nomeCliente', 'emailCliente', 'dataNascimentoCliente', 'solicitarServicos'],
+      select: ['id', 'nomeCliente', 'emailCliente', 'dataNascimentoCliente', 'agendamentos'],
     });
   }
 

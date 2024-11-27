@@ -5,6 +5,9 @@ export class CreateAgendamentoDto {
   @IsNumber({}, { message: 'Usuário é obrigatório' })
   usuarioId: number;
 
+  @IsNumber({}, { message: 'Cliente é obrigatório' })
+  clienteId: number;
+
   @IsDateString({}, { message: 'Data é obrigatória' })
   dataAgendamento: string;
 
@@ -19,7 +22,4 @@ export class CreateSolicitacaoServicoDto {
 
   @IsNumber({}, { message: 'Quantidade é obrigatória' })
   quantidade: number;
-
-  @IsNumber({}, {message: 'cliente é obrigatório'})
-  clienteId:number;
 }

@@ -24,6 +24,9 @@ export class SolicitarServico {
     @Column()
     agendamentoId: number;
 
+    @Column()
+    clienteId: number;
+
     @ManyToOne(() => Agendamento, (agendamento) => agendamento.solicitacoes)
     @JoinColumn({ name: 'agendamentoId' })
     agendamento: Agendamento;
@@ -31,9 +34,5 @@ export class SolicitarServico {
     @ManyToOne(() => Servico, (solicitacao) => solicitacao.solicitacoes)
     @JoinColumn({ name: 'servicoId' })
     servico: Servico;
-
-    @ManyToOne(() => Cliente, (cliente) => cliente.solicitarServicos)
-    @JoinColumn({ name: 'clienteId' })
-    cliente: Cliente;
 
 }

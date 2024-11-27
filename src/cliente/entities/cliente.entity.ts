@@ -1,3 +1,4 @@
+import { Agendamento } from 'src/agendamento/entities/agendamento.entity';
 import { SolicitarServico } from 'src/solicitarServico/entities/SolicitarServico.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
@@ -19,6 +20,9 @@ export class Cliente {
   senhaCliente: string;
 
   @Column()
+  chaveSeguraCliente: string;
+
+  @Column()
   telefoneCliente: string;
 
   @Column({ type: 'date' })
@@ -30,6 +34,6 @@ export class Cliente {
   @Column({ default: 'cliente' })
   role: string;
 
-  @OneToMany(() => SolicitarServico, (solicitarServico) => solicitarServico.cliente)
-  solicitarServicos: SolicitarServico[];
+  @OneToMany(() => Agendamento, (agendamento) => agendamento.cliente)
+  agendamentos: Agendamento[];
 }
