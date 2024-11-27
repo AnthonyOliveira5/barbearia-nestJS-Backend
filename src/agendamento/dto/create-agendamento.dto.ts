@@ -19,4 +19,7 @@ export class CreateSolicitacaoServicoDto {
 
   @IsNumber({}, { message: 'Quantidade é obrigatória' })
   quantidade: number;
+
+  @IsNumber({}, {message: 'cliente é obrigatório'})
+  clienteId:number;
 }

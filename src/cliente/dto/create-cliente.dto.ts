@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsDate, IsNotEmpty, IsNumber, Matches } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumber, IsStrongPassword, Matches } from 'class-validator';
 import { IsCPF } from 'class-validator-cpf';
 
 export class CreateClienteDto {
@@ -16,6 +16,13 @@ export class CreateClienteDto {
 
   @IsCPF({message: 'precisa ser um CPF válido'})
   CPFcliente: string;
+
+  @IsNotEmpty({ message: 'Senha é obrigatória' })
+  @IsStrongPassword(
+    { minLength: 8, minNumbers: 1, minLowercase: 1, minSymbols: 1 },
+    { message: 'Senha fraca' },
+  )
+  senhaCliente: string;
 
   @IsNotEmpty({message: 'Endereço é obrigatório'})
   enderecoCliente: string;

@@ -15,12 +15,12 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(config),
+    AuthModule,
     UsuariosModule,
     ClienteModule,
     AgendamentoModule,
     ServicosModule,
     SolicitarServicoModule,
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { SolicitarServico } from 'src/solicitarServico/entities/SolicitarServico.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 @Entity()
 export class Cliente {
@@ -8,11 +9,17 @@ export class Cliente {
   @Column()
   nomeCliente: string;
 
-  @Column()
+  @Column({unique: true})
   CPFCliente: string;
 
-  @Column()
+  @Column({unique: true})
   emailCliente: string;
+  
+  @Column()
+  senhaCliente: string;
+
+  @Column()
+  telefoneCliente: string;
 
   @Column({ type: 'date' })
   dataNascimentoCliente: Date;
@@ -20,4 +27,9 @@ export class Cliente {
   @Column()
   enderecoCliente: string;
 
+  @Column({ default: 'cliente' })
+  role: string;
+
+  @OneToMany(() => SolicitarServico, (solicitarServico) => solicitarServico.cliente)
+  solicitarServicos: SolicitarServico[];
 }

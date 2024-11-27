@@ -1,13 +1,14 @@
 import { Agendamento } from "src/agendamento/entities/agendamento.entity";
+import { Cliente } from "src/cliente/entities/cliente.entity";
 import { Servico } from "src/servicos/entities/servico.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class SolicitarServico {
 
     @PrimaryGeneratedColumn()
     id: number;
-    
+
     @Column()
     servicoId: number;
 
@@ -24,11 +25,15 @@ export class SolicitarServico {
     agendamentoId: number;
 
     @ManyToOne(() => Agendamento, (agendamento) => agendamento.solicitacoes)
-    @JoinColumn({name: 'agendamentoId'})
+    @JoinColumn({ name: 'agendamentoId' })
     agendamento: Agendamento;
 
     @ManyToOne(() => Servico, (solicitacao) => solicitacao.solicitacoes)
-    @JoinColumn({name: 'servicoId'})
-    servico: Servico;    
+    @JoinColumn({ name: 'servicoId' })
+    servico: Servico;
+
+    @ManyToOne(() => Cliente, (cliente) => cliente.solicitarServicos)
+    @JoinColumn({ name: 'clienteId' })
+    cliente: Cliente;
 
 }
