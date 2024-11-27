@@ -21,7 +21,7 @@ export class UsuariosService {
 
   findAll() {
     return this.usuariosRepository.find({
-      select: ['id', 'nome', 'email', 'agendamentos'],
+      select: ['id', 'nome', 'email','role', 'agendamentos'],
     });
   }
   findOne(id: number) {
