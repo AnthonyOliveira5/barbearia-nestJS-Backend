@@ -7,7 +7,7 @@ export class CreateClienteDto {
   nomeCliente: string;
   
   @IsNotEmpty({message: "Email é obrigatório"})
-  emailCliente: string;
+  email: string;
 
   @IsNotEmpty({ message: 'Data de nascimento é obrigatória' })
   @Type(() => Date)

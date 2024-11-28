@@ -14,27 +14,44 @@ export class ClienteService {
 
   async create(createClienteDto: CreateClienteDto) {
     const senhaCliente = await bcrypt.hash(createClienteDto.senhaCliente, 10);
-    const chaveSeguraCliente = await bcrypt.hash(createClienteDto.chaveSeguraCliente, 10);
-    const cliente = this.clienteRepository.create({ ...createClienteDto, senhaCliente, chaveSeguraCliente });
+    const chaveSeguraCliente = await bcrypt.hash(
+      createClienteDto.chaveSeguraCliente,
+      10,
+    );
+    const cliente = this.clienteRepository.create({
+      ...createClienteDto,
+      senhaCliente,
+      chaveSeguraCliente,
+    });
     return this.clienteRepository.save(cliente);
   }
 
   findAll() {
     return this.clienteRepository.find({
-      select: ['id', 'nomeCliente', 'emailCliente', 'dataNascimentoCliente', 'agendamentos'],
+      select: [
+        'id',
+        'nomeCliente',
+        'email',
+        'dataNascimentoCliente',
+        'agendamentos',
+      ],
     });
   }
 
   async findOne(id: number) {
-    const cliente = await this.clienteRepository.findOneBy({id: id});
+    const cliente = await this.clienteRepository.findOneBy({ id: id });
     if (!cliente) {
       throw new NotFoundException('Cliente não encontrado');
     }
     return cliente;
   }
 
+  findOneByEmail(email: string) {
+    return this.clienteRepository.findOneBy({ email });
+  }
+
   async update(id: number, updateClienteDto: UpdateClienteDto) {
-    const cliente = await this.clienteRepository.findOneBy({id: id});
+    const cliente = await this.clienteRepository.findOneBy({ id: id });
     if (!cliente) {
       throw new NotFoundException('Cliente não encontrado');
     }
@@ -42,7 +59,7 @@ export class ClienteService {
   }
 
   async remove(id: number) {
-    const cliente = await this.clienteRepository.findOneBy({id: id});
+    const cliente = await this.clienteRepository.findOneBy({ id: id });
     if (!cliente) {
       throw new NotFoundException('Cliente não encontrado');
     }

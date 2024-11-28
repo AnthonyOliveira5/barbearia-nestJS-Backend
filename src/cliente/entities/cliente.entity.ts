@@ -14,7 +14,7 @@ export class Cliente {
   CPFCliente: string;
 
   @Column({unique: true})
-  emailCliente: string;
+  email: string;
   
   @Column()
   senhaCliente: string;

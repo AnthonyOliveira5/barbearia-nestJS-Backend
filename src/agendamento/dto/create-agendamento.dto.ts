@@ -1,4 +1,4 @@
-import { IsDateString, IsNumber, ValidateNested } from 'class-validator';
+import { IsDateString, IsNumber, IsString, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateAgendamentoDto {

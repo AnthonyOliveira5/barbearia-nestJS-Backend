@@ -55,10 +55,10 @@ export class AgendamentoService {
     await this.solicitarServicosRepository.save(solicitacoes);
   
     return agendamento;
-  }
+  }  
   findAll() {
     return this.agendamentosRepository.find({
-      relations: ['solicitacoes', 'solicitacoes.servico', 'cliente'],
+      relations: ['solicitacoes', 'solicitacoes.servico', 'cliente', 'usuario'],
     });
   }
 
