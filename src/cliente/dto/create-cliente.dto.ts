@@ -15,7 +15,7 @@ export class CreateClienteDto {
   dataNascimentoCliente: Date;
 
   @IsCPF({message: 'precisa ser um CPF válido'})
-  CPFcliente: string;
+  CPFCliente: string;
 
   @IsNotEmpty({ message: 'Senha é obrigatória' })
   @IsStrongPassword(
@@ -29,4 +29,6 @@ export class CreateClienteDto {
 
   @IsNotEmpty({message: 'Endereço é obrigatório'})
   enderecoCliente: string;
+  @Matches(/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/, { message: 'Número de telefone inválido' })
+  telefoneCliente: string;
 }
