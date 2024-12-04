@@ -1,14 +1,14 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards, Patch } from '@nestjs/common';
 import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
-import { UpdateClienteDto } from './dto/update-cliente.dto';
+import { UpdateClienteDto, UpdatePasswordDto } from './dto/update-cliente.dto';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { Roles } from 'src/auth/roles.decorator';
 
 @Controller('clientes')
 export class ClienteController {
-  constructor(private readonly clienteService: ClienteService) {}
+  constructor(private readonly clienteService: ClienteService) { }
 
   @Post()
   create(@Body() createClienteDto: CreateClienteDto) {
@@ -30,9 +30,17 @@ export class ClienteController {
   }
 
   @Put(':id')
-  @UseGuards(AuthGuard)
   update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {
     return this.clienteService.update(+id, updateClienteDto);
+  }
+
+  @Patch(':id/senha')
+  async updatePasswordWithSecureKey(
+    @Param('id') id: string,
+    @Body() updatePasswordDto: UpdatePasswordDto,
+  ) {
+    const { chaveSeguraCliente, senha } = updatePasswordDto;
+    return this.clienteService.updatePasswordWithSecureKey(+id, chaveSeguraCliente, senha);
   }
 
   @Delete(':id')
