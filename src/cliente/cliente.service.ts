@@ -3,7 +3,7 @@ import { UpdateClienteDto } from './dto/update-cliente.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cliente } from './entities/cliente.entity';
 import { Repository } from 'typeorm';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
 export class ClienteService {
@@ -39,6 +39,24 @@ export class ClienteService {
       throw new NotFoundException('Cliente não encontrado');
     }
     return this.clienteRepository.update(id, updateClienteDto);
+  }
+
+  async updatePasswordWithSecureKey(id: number, chaveSegura: string, novaSenha: string) {
+    const cliente = await this.clienteRepository.findOneBy({ id });
+    if (!cliente) {
+      throw new NotFoundException('Cliente não encontrado');
+    }
+  
+    const isChaveValida = await bcrypt.compare(chaveSegura, cliente.chaveSeguraCliente);
+    if (!isChaveValida) {
+      throw new UnauthorizedException('Chave segura inválida');
+    }
+  
+    const senhaHash = await bcrypt.hash(novaSenha, 10);
+  
+    cliente.senhaCliente = senhaHash;
+  
+    return this.clienteRepository.save(cliente);
   }
 
   async remove(id: number) {
