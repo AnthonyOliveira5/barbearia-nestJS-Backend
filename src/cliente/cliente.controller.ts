@@ -29,6 +29,11 @@ export class ClienteController {
     return this.clienteService.findOne(+id);
   }
 
+  @Get('email/:email')
+  async findByEmail(@Param('email') email: string) {
+    return this.clienteService.findOneByEmail(email);
+  }
+
   @Put(':id')
   update(@Param('id') id: string, @Body() updateClienteDto: UpdateClienteDto) {
     return this.clienteService.update(+id, updateClienteDto);

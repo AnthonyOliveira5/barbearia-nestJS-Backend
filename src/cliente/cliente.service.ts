@@ -10,7 +10,7 @@ export class ClienteService {
   constructor(
     @InjectRepository(Cliente)
     private clienteRepository: Repository<Cliente>,
-  ) {}
+  ) { }
 
   async create(createClienteDto: CreateClienteDto) {
     const senhaCliente = await bcrypt.hash(createClienteDto.senhaCliente, 10);
@@ -46,8 +46,12 @@ export class ClienteService {
     return cliente;
   }
 
-  findOneByEmail(email: string) {
-    return this.clienteRepository.findOneBy({ email });
+  async findOneByEmail(email: string) {
+    const cliente = await this.clienteRepository.findOneBy({ email });
+    if (!cliente) {
+      throw new NotFoundException('Cliente com este email não encontrado');
+    }
+    return cliente;
   }
 
   async update(id: number, updateClienteDto: UpdateClienteDto) {
@@ -63,16 +67,16 @@ export class ClienteService {
     if (!cliente) {
       throw new NotFoundException('Cliente não encontrado');
     }
-  
+
     const isChaveValida = await bcrypt.compare(chaveSegura, cliente.chaveSeguraCliente);
     if (!isChaveValida) {
       throw new UnauthorizedException('Chave segura inválida');
     }
-  
+
     const senhaHash = await bcrypt.hash(novaSenha, 10);
-  
+
     cliente.senhaCliente = senhaHash;
-  
+
     return this.clienteRepository.save(cliente);
   }
 
